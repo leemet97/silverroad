@@ -1,0 +1,449 @@
+/* 1. Base */
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 20px;
+  line-height: 1.8;
+  background: #f7f4ef;
+  color: #1c2430;
+}
+.container {
+  max-width: 100%;
+  padding: 20px;
+}
+.hidden {
+  display: none !important;
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+/* 2. Header */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  border-radius: 12px;
+}
+header input[type="text"] {
+  flex: 1;
+  min-width: 150px;
+  font-size: 18px;
+  padding: 12px 16px;
+  border: 1px solid #d9e0ea;
+  border-radius: 10px;
+}
+.logo {
+  width: 80px;
+  height: 50px;
+}
+header.scrolled {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* 3. Buttons */
+.btn {
+  font-size: 20px;
+  padding: 14px 22px;
+  min-height: 48px;
+  min-width: 44px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+}
+.btn-primary {
+  background: #145da0;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #0b3f6e;
+}
+.btn-outline {
+  background: transparent;
+  color: #1c2430;
+  border: 1px solid #d9e0ea;
+}
+.btn-outline:hover {
+  background: #2d7a78;
+  color: #fff;
+}
+
+/* 4. Nav */
+nav {
+  margin: 24px 0;
+}
+nav .menu {
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  padding: 14px 16px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+nav .menu button {
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #d9e0ea;
+  background: transparent;
+  color: #1c2430;
+  cursor: pointer;
+}
+nav .menu button:hover {
+  background: #2d7a78;
+  color: #fff;
+}
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d9e0ea;
+  background: #fff;
+  color: #1c2430;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.nav-toggle:hover {
+  background: #2d7a78;
+  color: #fff;
+}
+
+/* 5. Hero Slider */
+.mainImg {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  border-radius: 12px;
+}
+.imgBox {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+.imgBox img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.leftarrow,
+.rightarrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  border: none;
+  background: rgba(20, 93, 160, 0.85);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.leftarrow {
+  left: 10px;
+}
+.rightarrow {
+  right: 10px;
+}
+.leftarrow:hover,
+.rightarrow:hover {
+  background: rgba(11, 63, 110, 0.95);
+}
+
+/* 6. Content (Cards & Panels) */
+.selectrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.trip-card {
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.trip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+.trip-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.trip-body {
+  padding: 14px 16px;
+}
+.trip-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.trip-sub {
+  font-size: 16px;
+  color: #5b6776;
+  margin-top: 6px;
+}
+
+.detail-panel {
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  border-radius: 12px;
+  padding: 16px;
+}
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.detail-header h3 {
+  font-size: 22px;
+  margin: 0;
+}
+.detail-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  border: 1px solid #d9e0ea;
+  background: #fff;
+  color: #145da0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.tab-btn.active,
+.tab-btn:hover {
+  background: #145da0;
+  color: #fff;
+  border-color: #145da0;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.detail-card {
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.detail-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.dc-body {
+  padding: 10px 12px;
+}
+.dc-title {
+  font-weight: 700;
+  font-size: 18px;
+}
+.dc-sub {
+  font-size: 14px;
+  color: #5b6776;
+}
+
+.detail-cta a,
+.btn-primary-link {
+  display: inline-block;
+  background: #145da0;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.detail-cta a:hover,
+.btn-primary-link:hover {
+  background: #0b3f6e;
+}
+
+/* 7. Footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 16px;
+}
+.footerlogo img {
+  height: 55px;
+}
+
+/* 8. Iframe & View Area */
+.view-area iframe {
+  display: none;
+}
+.view-area.show-frame .hero {
+  display: none;
+}
+.view-area.show-frame iframe {
+  display: block;
+}
+#contentFrame {
+  width: 100%;
+  min-height: 600px;
+  border: 1px solid #d9e0ea;
+  border-radius: 12px;
+  background: #fff;
+  position: relative;
+  z-index: 0;
+}
+.view-area .hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* 9. Mobile Responsive (<=600px) */
+@media (max-width: 600px) {
+  body {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  .container {
+    padding: 12px;
+  }
+  section {
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px;
+    gap: 10px;
+  }
+  header .logo {
+    align-self: center;
+  }
+  header input[type="text"] {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+  header button.btn {
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  nav .menu {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+  }
+  nav .menu.is-open {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  nav .menu .btn {
+    font-size: 18px;
+    padding: 12px 16px;
+    min-height: 52px;
+  }
+
+  .mainImg {
+    margin: 14px auto;
+    border-radius: 10px;
+  }
+  .imgBox img {
+    height: 260px;
+  }
+  .leftarrow,
+  .rightarrow {
+    bottom: 10px;
+    top: auto;
+    font-size: 22px;
+    padding: 6px 10px;
+    transform: none;
+  }
+  .leftarrow {
+    left: 8px;
+  }
+  .rightarrow {
+    right: 8px;
+  }
+
+  .selectrip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .trip-body {
+    padding: 12px;
+  }
+  .trip-title {
+    font-size: 18px;
+  }
+  .trip-sub {
+    font-size: 14px;
+  }
+
+  .detail-tabs {
+    gap: 6px;
+  }
+  .tab-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .detail-card img {
+    height: 160px;
+  }
+  .dc-title {
+    font-size: 16px;
+  }
+  .dc-sub {
+    font-size: 13px;
+  }
+
+  footer {
+    padding: 12px;
+    gap: 10px;
+  }
+  .footerlogo img {
+    height: 46px;
+  }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>슬라이드 테스트</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.mainImg {
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 12px;
+}
+
+.imgBox {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.imgBox img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  pointer-events: none; /* 이미지가 버튼 클릭 막지 않도록 */
+}
+
+.leftarrow, .rightarrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  border: none;
+  background: rgba(20, 93, 160, 0.85);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.leftarrow { left: 10px; }
+.rightarrow { right: 10px; }
+
+.leftarrow:hover, .rightarrow:hover {
+  background: rgba(11, 63, 110, 0.95);
+}
+
+</style>
+<body>
+  <section class="hero">
+    <div class="mainImg">
+      <div class="imgBox">
+        <img src="https://picsum.photos/id/1015/1200/600" alt="slide1">
+        <img src="https://picsum.photos/id/1016/1200/600" alt="slide2">
+        <img src="https://picsum.photos/id/1018/1200/600" alt="slide3">
+      </div>
+      <button class="leftarrow" type="button">＜</button>
+      <button class="rightarrow" type="button">＞</button>
+    </div>
+  </section>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const imgBox = document.querySelector(".imgBox");
+  const slides = document.querySelectorAll(".imgBox img");
+  const leftBtn = document.querySelector(".leftarrow");
+  const rightBtn = document.querySelector(".rightarrow");
+  const hero = document.querySelector(".mainImg");
+
+  if (imgBox && slides.length && leftBtn && rightBtn && hero) {
+    let index = 0;
+    const total = slides.length;
+    const AUTO_MS = 2500;
+    let autoTimer = null;
+
+    // 슬라이드 이동
+    function showSlide(i) {
+      index = (i + total) % total;
+      imgBox.style.transform = `translateX(-${index * 100}%)`;
+    }
+    function nextImg() { showSlide(index + 1); }
+    function prevImg() { showSlide(index - 1); }
+
+    // 화살표 이벤트
+    rightBtn.addEventListener("click", () => {
+      console.log("▶ 버튼 클릭됨");
+      nextImg();
+    });
+    leftBtn.addEventListener("click", () => {
+      console.log("◀ 버튼 클릭됨");
+      prevImg();
+    });
+
+    // 자동재생
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(nextImg, AUTO_MS);
+    }
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // 드래그 지원
+    let isDown = false;
+    let startX = 0;
+    let currentX = 0;
+    const THRESHOLD = 50;
+
+    hero.addEventListener("pointerdown", (e) => {
+      isDown = true;
+      startX = e.clientX;
+      currentX = startX;
+      imgBox.style.transition = "none";
+      stopAuto();
+      hero.setPointerCapture(e.pointerId);
+    });
+
+    hero.addEventListener("pointermove", (e) => {
+      if (!isDown) return;
+      currentX = e.clientX;
+      const delta = currentX - startX;
+      imgBox.style.transform = `translateX(calc(-${index * 100}% + ${delta}px))`;
+    });
+
+    function endDrag() {
+      if (!isDown) return;
+      isDown = false;
+      imgBox.style.transition = "";
+
+      const delta = currentX - startX;
+      if (Math.abs(delta) > THRESHOLD) {
+        if (delta < 0) nextImg();
+        else prevImg();
+      } else {
+        showSlide(index);
+      }
+      startAuto();
+    }
+
+    hero.addEventListener("pointerup", endDrag);
+    hero.addEventListener("pointercancel", endDrag);
+    hero.addEventListener("pointerleave", endDrag);
+
+    hero.addEventListener("mouseenter", stopAuto);
+    hero.addEventListener("mouseleave", startAuto);
+
+    // 초기 실행
+    showSlide(0);
+    startAuto();
+  }
+});
+
+  </script>
+</body>
+</html>
