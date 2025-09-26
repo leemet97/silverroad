@@ -1,38 +1,78 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>국내여행</title>
-  <link rel="stylesheet" href="../css/reset.css" />
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
-<body>
-  <section>
-    <h2>국내여행 베스트</h2>
-    <div class="selectrip">
-      <article class="trip-card">
-        <img class="trip-thumb" src="../img/buyeo.jpg" alt="부여" />
-        <div class="trip-body">
-          <div class="trip-title">부여 수륙양용 시티투어</div>
-          <div class="trip-sub">정림사지 · 궁남지 · 국립부여박물관</div>
-        </div>
-      </article>
-      <article class="trip-card">
-        <img class="trip-thumb" src="../img/gangneung01.jpg" alt="강릉" />
-        <div class="trip-body">
-          <div class="trip-title">강릉 힐링 1박2일</div>
-          <div class="trip-sub">안목해변 · 경포호 · 주문진</div>
-        </div>
-      </article>
-      <article class="trip-card">
-        <img class="trip-thumb" src="../img/suncheonman.jpg" alt="순천만" />
-        <div class="trip-body">
-          <div class="trip-title">순천만 국가정원과 미식</div>
-          <div class="trip-sub">관람차 · 순천만습지 · 순천형 브런치</div>
-        </div>
-      </article>
-    </div>
-  </section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>국내여행</title>
+    <style>
+      .trip-card {
+        position: relative;
+      }
+      .trip-card .cover-link {
+        position: absolute;
+        inset: 0;
+        display: block;
+        text-indent: -9999px;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <section>
+      <h2>국내여행 베스트</h2>
+      <div class="selectrip">
+        <article class="trip-card">
+          <img
+            src="../img/buyeo.jpg"
+            alt="부여 수륙양용 시티투어 대표 이미지"
+          />
+          <h4 class="title">부여 수륙양용 시티투어</h4>        
+          <p class="desc">정림사지 · 궁남지 · 국립부여박물관</p>
+
+          <!-- ⭐ 갤러리 트리거(오버레이) -->
+          <a
+            href="#"
+            class="cover-link gallery-trigger"
+            data-title="부여 수륙양용 시티투어"
+            data-key="buyeo"
+            data-count="7"
+            >부여 수륙양용 시티투어 이미지 보기</a
+          >
+        </article>
+        <article class="trip-card">
+          <img
+            src="../img/gangneung01.jpg"
+            alt="강릉 힐링 1박2일 대표 이미지"
+          />
+          <h4 class="title">강릉 힐링 1박2일</h4>
+          <p class="desc">안목해변 · 경포호 · 주문진</p>
+          <a
+            href="#"
+            class="cover-link gallery-trigger"
+            data-title="강릉 힐링 1박2일"
+            data-key="gangneung"
+            data-count="5"
+            >강릉 이미지 보기</a
+          >
+        </article>
+        <article class="trip-card">
+          <img
+            src="../img/suncheonman.jpg"
+            alt="순천만 국가정원과 미식체험 대표 이미지"
+          />
+          <h4 class="title">순천만 국가정원과 미식체험</h4>
+          <p class="desc">관람차 · 순천만습지 · 브런치</p>
+          <a
+            href="#"
+            class="cover-link gallery-trigger"
+            data-title="순천만 국가정원과 미식체험"
+            data-key="suncheon"
+            data-count="6"
+            >순천 이미지 보기</a
+          >
+        </article>
+      </div>
+    </section>
+  </body>
 </html>

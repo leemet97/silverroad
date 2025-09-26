@@ -6,6 +6,8 @@
   <title>시니어여행플랫폼</title>
   <link rel="stylesheet" href="./css/reset.css" />
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/gallery.css" />
+
   <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
 </head>
 <body>
@@ -20,21 +22,20 @@
       <button id="loginBtn" class="btn btn-primary">로그인</button>
       <button id="joinBtn" class="btn btn-primary">회원가입</button>
       <button id="resvBtn" class="btn btn-primary">예약</button>
+      <button id="navToggle" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="primary-menu">
+       <i class="ri-menu-line" aria-hidden="true"></i> <span class="blind">메뉴</span>
+      </button>
     </header>
 
     <!-- 네비 -->
     <nav>
-      <button id="navToggle" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="primary-menu">
-       <i class="ri-menu-line" aria-hidden="true"></i> <span class="blind">메뉴</span>
-      </button>
       <div class="menu" id="primary-menu">
-        <button id="menu1" type="button" class="btn btn-outline" data-page="./pages/domestic.html">국내여행</button>
-        <button id="menu2" type="button" class="btn btn-outline" data-page="./pages/silver.html">고품격호텔여행</button>
-        <button id="menu3" type="button" class="btn btn-outline" data-page="./pages/tips.html">여행팁</button>
-        <button id="menu4" type="button" class="btn btn-outline" data-page="./pages/comm.html">커뮤니티</button>
-      </div>
+  <button class="btn" data-page="./pages/domestic.html"><i class="ri-map-2-line" aria-hidden="true"></i> 국내여행</button>
+  <button class="btn" data-page="./pages/silver.html"><i class="ri-hotel-line" aria-hidden="true"></i> 고품격호텔여행</button>
+  <button class="btn" data-page="./pages/tips.html"><i class="ri-lightbulb-line" aria-hidden="true"></i> 여행팁</button>
+  <button class="btn" data-page="./pages/comm.html"><i class="ri-chat-1-line" aria-hidden="true"></i> 커뮤니티</button>
+</div>
     </nav>
-
     <main> 
   <section class="view-area" id="viewArea">
     <div class="hero">
@@ -50,16 +51,34 @@
           <img src="./img/carlovivari.jpg" alt="" />
           <img src="./img/rotorua.jpg" alt="" />
         </div>
-        <button class="rightarrow" type="button">＞</button>
-        <button class="leftarrow" type="button">＜</button>
+        <button class="rightarrow" type="button">▶</button>
+        <button class="leftarrow" type="button">◀</button>
        
       </div>
     </div>
 
     <!-- ✅ 같은 자리의 iframe (초기엔 숨김) -->
     <iframe id="contentFrame" title="콘텐츠 영역" frameborder="0"></iframe>
+
   </section>
+  <section id="galleryLayer" class="gallery-layer" aria-hidden="true">
+  <div class="g-header">
+    <div class="g-title" id="gTitle">코스명</div>
+    <button class="g-close" id="gClose" aria-label="닫기">✕</button>
+  </div>
+
+  <div class="slider" id="slider" aria-roledescription="carousel" aria-label="코스 소개 이미지">
+    <div class="track" id="track"></div>
+    <button class="arrow prev" id="prev" aria-label="이전">◀</button>
+    <button class="arrow next" id="next" aria-label="다음">▶</button>
+  </div>
+
+  <div class="dots" id="dots"></div>
+  <div class="hint">팁: 키보드 ←/→, 터치 스와이프 가능</div>
+</section>
+
 </main>
+
 
   <!-- 푸터 -->
   <footer>
@@ -67,10 +86,10 @@
       <img src="./img/logo.png" alt="logo" />
     </div>
     <div class="footerBox">
-      <h3>프로젝트명: 포트폴리오용 실버로드(Silver Road)</h3>
+      <h4>프로젝트명: 포트폴리오용 실버로드(Silver Road)</h4>
       <div class="footertext2">시니어 여행플랫폼 제작자: 이진선 1인</div>
       <div class="footertext3">개발기간: 2025.09.15 ~ 09.28 (2주간)</div>
-      <h4>COPYRIGHT Ⓒ 2025 이진선 RIGHTS RESERVED.</h4>
+      <h5>COPYRIGHT Ⓒ 2025 이진선 RIGHTS RESERVED.</h5>
     </div>
   </footer>
 

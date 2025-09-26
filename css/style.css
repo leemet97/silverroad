@@ -173,34 +173,54 @@ nav .menu button:hover {
 .selectrip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 .trip-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid #d9e0ea;
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 14px;
+  overflow: visible;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.trip-card > img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+}
+
 .trip-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 .trip-thumb {
   width: 100%;
-  height: 180px;
+  height: clamp(240px, 32vw, 400px);
   object-fit: cover;
+  border-radius: 12px;
 }
 .trip-body {
   padding: 14px 16px;
 }
-.trip-title {
-  font-size: 20px;
+/* 3) 텍스트가 항상 위층에서 보이게 */
+.trip-card .title,
+.trip-card .desc {
+  position: relative;
+  z-index: 2; /* ← 텍스트를 최상단 레이어로 */
+  color: #222; /* 배경과 대비 보장 */
+}
+
+.data-title {
+  font-size: 22px;
   font-weight: 700;
 }
 .trip-sub {
-  font-size: 16px;
+  font-size: 18px;
   color: #5b6776;
   margin-top: 6px;
 }
@@ -291,14 +311,29 @@ footer {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
-  padding: 16px;
+  gap:6px;
+  padding: 10px 12px;
+}
+.footerBox{
+  display:flex;
+  flex-direction: column;
+  row-gap: 4px;         /* 각 텍스트 행 사이 간격 */
 }
 .footerlogo img {
-  height: 55px;
+  height: 80px;
 }
+.footerBox h3,
+.footerBox h4,
+.footerBox .footertext2,
+.footerBox .footertext3{
+  margin: 0;
+  line-height: 1.3;     /
+ }
 
 /* 8. Iframe & View Area */
+.view-area {
+  scroll-margin-top: 80px;
+}
 .view-area iframe {
   display: none;
 }
@@ -337,11 +372,13 @@ footer {
     border-radius: 10px;
   }
 
+  /* 헤더 고정 + 햄버거 우상단 */
   header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 14px;
-    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: #fff;
+    padding-right: 64px; /* 햄버거 자리 */
   }
   header .logo {
     align-self: center;
@@ -358,30 +395,75 @@ footer {
 
   .nav-toggle {
     display: inline-flex;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  nav .menu {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    max-height: 0;
-    opacity: 0;
-    pointer-events: none;
-    overflow: hidden;
-    transition: max-height 0.35s ease, opacity 0.25s ease;
-  }
-  nav .menu.is-open {
-    max-height: 600px;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  nav .menu .btn {
-    font-size: 18px;
-    padding: 12px 16px;
-    min-height: 52px;
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    width: auto;
+    margin: 0;
+    padding: 10px 12px;
+    z-index: 40;
   }
 
+  /* 드롭다운 패널: 헤더 바로 아래 (히어로 위에 겹치기) */
+  nav {
+    position: static;
+    z-index: 35;
+    margin: 0;
+  }
+  nav .menu {
+    position: fixed; /* 뷰포트 기준 */
+    left: 12px;
+    right: 12px;
+    top: var(--nav-dropdown-top, 72px); /* JS가 header.bottom + 8px로 갱신 */
+    z-index: 1000;
+
+    display: grid !important; /* 2x2 */
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    background: #fff;
+    border: 1px solid #d9e0ea;
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    padding: 12px;
+    max-height: 70vh;
+    overflow: auto;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  nav .menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* 큰 버튼 */
+  nav .menu .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    min-height: 56px;
+    padding: 14px 12px;
+    border-radius: 14px;
+    background: #145da0;
+    color: #fff;
+    border-color: #145da0;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.04);
+  }
+  nav .menu .btn i {
+    font-size: 20px;
+  }
+  nav .menu .btn:active {
+    transform: translateY(1px);
+  }
+
+  /* 히어로 조정 */
   .mainImg {
     margin: 14px auto;
     border-radius: 10px;
@@ -404,6 +486,7 @@ footer {
     right: 8px;
   }
 
+  /* 카드/디테일 확대 */
   .selectrip {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -412,10 +495,13 @@ footer {
     padding: 12px;
   }
   .trip-title {
-    font-size: 18px;
+    font-size: 20px;
+  }
+  .trip-thumb {
+    height: 240px;
   }
   .trip-sub {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .detail-tabs {
@@ -428,9 +514,10 @@ footer {
   .detail-grid {
     grid-template-columns: 1fr;
     gap: 10px;
+    margin-top: 10px;
   }
   .detail-card img {
-    height: 160px;
+    height: 240px;
   }
   .dc-title {
     font-size: 16px;
@@ -440,10 +527,125 @@ footer {
   }
 
   footer {
-    padding: 12px;
-    gap: 10px;
+    padding: 8px;
+    gap: 5px;
   }
   .footerlogo img {
     height: 46px;
+  }
+}
+/* === 간단 갤러리 === */
+.gallery-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  background: rgba(0, 0, 0, 0.55);
+}
+.gallery-layer.show {
+  display: block;
+}
+.g-header {
+  max-width: 1100px;
+  margin: 60px auto 8px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0e151d;
+  color: #e6eef7;
+  border: 1px solid #223244;
+  border-radius: 12px;
+}
+.g-title {
+  font-weight: 700;
+}
+.g-close {
+  border: 0;
+  background: transparent;
+  color: #8aa2b2;
+  cursor: pointer;
+  font-size: 18px;
+}
+.g-close:hover {
+  color: #e6eef7;
+}
+.slider {
+  max-width: 1100px;
+  height: min(62vh, 760px);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: #121a24;
+  border: 1px solid #26384a;
+  border-radius: 16px;
+}
+.track {
+  display: flex;
+  transition: transform 0.4s ease;
+  height: 100%;
+}
+.slide {
+  min-width: 100%;
+  height: 100%;
+  background: #0b0f14 center/cover no-repeat;
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #0d1823cc;
+  border: 1px solid #315068;
+  color: #cfe7fb;
+  cursor: pointer;
+  z-index: 2;
+}
+.prev {
+  left: 10px;
+}
+.next {
+  right: 10px;
+}
+.arrow:hover {
+  background: #122132;
+}
+.dots {
+  max-width: 1100px;
+  margin: 8px auto 0;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a5166;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.dot.active {
+  background: #86d6ff;
+  opacity: 1;
+  transform: scale(1.15);
+}
+.hint {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4px 10px 18px;
+  color: #9fb4c4;
+  font-size: 13px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .slider {
+    height: 56vh;
   }
 }
